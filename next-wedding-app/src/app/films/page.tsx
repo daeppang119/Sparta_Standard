@@ -34,10 +34,16 @@ const FilmsPage = () => {
     return <div>오류가 발생하였습니다...!</div>;
   }
 
+  // 데이터가 존재하는
+  const filteredFilms = films?.filter((f) => {
+    return category === "All" ? true : f.category === category;
+  });
+
   return (
     <div className="w-full mx-[60px]">
       <ul className="flex justify-end gap-[20px]">
         <li
+          className="cursor-pointer"
           onClick={() => {
             setCategory("ALL");
           }}
@@ -45,6 +51,7 @@ const FilmsPage = () => {
           ALL
         </li>
         <li
+          className="cursor-pointer"
           onClick={() => {
             setCategory("Wedding day");
           }}
@@ -52,6 +59,7 @@ const FilmsPage = () => {
           Wedding day
         </li>
         <li
+          className="cursor-pointer"
           onClick={() => {
             setCategory("Pre-wedding");
           }}
@@ -59,6 +67,7 @@ const FilmsPage = () => {
           Pre-wedding
         </li>
         <li
+          className="cursor-pointer"
           onClick={() => {
             setCategory("Baby");
           }}
@@ -67,10 +76,11 @@ const FilmsPage = () => {
         </li>
       </ul>
       <Spacer y={40} />
-      <section className="flex justify-center flex-wrap">
-        {films
-          ?.filter((f) => f.category === category)
-          .map((film) => {
+      {Number(filteredFilms?.length) <= 0 ? (
+        <div>정보가 존재하지 않습니다.</div>
+      ) : (
+        <section className="flex justify-center flex-wrap">
+          {filteredFilms?.map((film) => {
             return (
               <div className="w-1/2 h-[230px] p-[5px]" key={film.id}>
                 <div className="bg-red-100 w-full h-full relative">
@@ -85,7 +95,8 @@ const FilmsPage = () => {
               </div>
             );
           })}
-      </section>
+        </section>
+      )}
     </div>
   );
 };

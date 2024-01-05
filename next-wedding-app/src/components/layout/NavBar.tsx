@@ -1,14 +1,39 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 
 const NavBar = () => {
+  const pathname = usePathname();
+
   return (
     <nav className="flex justify-center gap-[4rem]">
-      <Link href={"/about"}>ABOUT</Link>
-      <Link href={"/films"}>FILMS</Link>
-      <Link href={"/reservation"}>RESERVATION</Link>
-      <Link href={"/qna"}>QnA</Link>
+      <Link
+        className={`${pathname === "/about" ? "font-bold" : ""}`}
+        href={"/about"}
+      >
+        ABOUT
+      </Link>
+      <Link
+        className={`${pathname === "/films" ? "font-bold" : ""}`}
+        href={"/films"}
+      >
+        FILMS
+      </Link>
+      <Link
+        className={`${pathname === "/reservation" ? "font-bold" : ""}`}
+        href={"/reservation"}
+      >
+        RESERVATION
+      </Link>
+      <Link
+        className={`${pathname === "/qna" ? "font-bold" : ""}`}
+        href={"/qna"}
+      >
+        QnA
+      </Link>
       <div className="flex justify-center gap-[1rem]">
         <Image
           src="/images/instagram.png"
