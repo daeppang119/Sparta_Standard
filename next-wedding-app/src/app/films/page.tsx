@@ -39,6 +39,8 @@ const FilmsPage = () => {
     return category === "All" ? true : f.category === category;
   });
 
+  console.log(filteredFilms);
+
   return (
     <div className="w-full mx-[60px]">
       <ul className="flex justify-end gap-[20px]">
@@ -76,21 +78,15 @@ const FilmsPage = () => {
         </li>
       </ul>
       <Spacer y={40} />
-      {Number(filteredFilms?.length) <= 0 ? (
+      {Number(films?.length) <= 0 ? (
         <div>정보가 존재하지 않습니다.</div>
       ) : (
         <section className="flex justify-center flex-wrap">
-          {filteredFilms?.map((film) => {
+          {films?.map((film) => {
             return (
               <div className="w-1/2 h-[230px] p-[5px]" key={film.id}>
                 <div className="bg-red-100 w-full h-full relative">
-                  <Image
-                    src={film.imageUrl}
-                    alt={film.name}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="center"
-                  />
+                  <Image src={film.imageUrl} alt={film.name} fill />
                 </div>
               </div>
             );
